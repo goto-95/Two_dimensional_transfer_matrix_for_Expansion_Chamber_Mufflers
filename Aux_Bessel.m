@@ -2,7 +2,7 @@ function [kroot, value] = Aux_Bessel(kr_prev,Nmax,tol,delta)
     %   ===============================================================================
     %%%%%%%%%% ========== EigenFunction ========== %%%%%%%%%% 
     %%%%% ----- Description ----- %%%%%
-    %   
+    %   Computes the Bessel roots for the expansion chamber domain
     %
     %%%%% ----- Arguments ----- %%%%%
     % kr_prev -> Previous radial roots
