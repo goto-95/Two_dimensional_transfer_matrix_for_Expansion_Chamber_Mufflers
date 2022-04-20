@@ -17,13 +17,13 @@
     clc
 
 %%%%% ---------- Expansion chamber data ---------- %%%%%    
-    Data_Silencer3;
+    Data_Silencer;
 
 %%%%% ---------- Parameters of numerical solution of the characteristic equation ---------- %%%%%     
     Nmax = 20;      % Maximuum number of iterations        
     delta = 1e-2;   % Secant method step 
     tol = 1e-10;    % Error tolerance    
-    Nmode = 10;      % Number of extra wave modes
+    Nmode = 10;     % Number of extra wave modes
     warning off;
     
 %%%%% ---------- Finding roots ---------- %%%%%       
@@ -53,14 +53,14 @@
         % ---------- Axial wavenumbers ---------- %
         ko = 2*pi*freq(cont)/co;
         ko = ko*(1-1i*eta/2);
-        kIn = Aux_AxialWavenumber(ko,alpha_n/r1);
-        kIIn = Aux_AxialWavenumber(ko,alpha_n/r2);
+        kIn = Aux_AxialWavenumber(ko,alpha_n/rd);
+        kIIn = Aux_AxialWavenumber(ko,alpha_n/rc);
         
         % ---------- Wavenumbers curves for chamber region ---------- % 
         kIIn_curves(:,cont) = kIIn; % For plotting if you wondering get the dispersion curves
         
         % ---------- Wave Coefficients ---------- %
-        [Xa,Xt] = Aux_AlphaCoef(r1,r2,alpha_n,kIn,kIIn,Lc,Nmode,1);
+        [Xa,Xt] = Aux_AlphaCoef(rd,rc,alpha_n,kIn,kIIn,Lc,Nmode,1);
         Ba = Xa(1:Nmode+1,1);           
         Bt = Xt(1:Nmode+1,1);
         Ea = Xa(3*Nmode+4:4*Nmode+4,1);
