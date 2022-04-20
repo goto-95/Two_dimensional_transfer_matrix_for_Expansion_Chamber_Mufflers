@@ -1,8 +1,5 @@
             %%%%% ---------- Data_Silencer ---------- %%%%%
 % =============================================================================== % 
-% Acoustical silencer parameters based from from A. Selamet (1997) - "The effect 
-% of length on the acoustic attenuation perfomance of concentric expansion 
-% chambers"
 % Acoustical silencer parameters for the manufactured ECM
 % =============================================================================== %
 
@@ -21,16 +18,16 @@
 %%%%% ----- Acoustical silencer parameters ----- %%%%%    
     Lc = 104e-3;       % Chamber length [m]
     Ld = 77.5e-3;      % Inlet/outlet duct length
-    
-    r1 = 53e-3/2;   
-    r2 = 150e-3/2;   
-    Sc = pi*r2^2;
-    Sd = pi*r1^2;
-    Y = (rho*co)/Sd;
-    Yc = (rho*co)/Sc;
+    Dd = 53e-3;        % Inlet/outlet duct diameter [m]   
+    rd = 53e-3/2;      % Inlet/outlet duct radius [m]  
+    Dc = 53e-3;        % Expansion chamber diameter [m] 
+    rc = Dc/2;         % Expansion chamber radius [m]
+    Sc = pi*rc^2;      % Transversal chamber area [m^2]
+    Sd = pi*rd^2;      % Transversal duct area [m^2]
+    Y = (rho*co)/Sd;   % Volume velocity impedance for the duct [Pa*s/m^3]
+    Yc = (rho*co)/Sc;  % Volume velocity impedance for the chamber [Pa*s/m^3]
     Nc = 1;            % Number of cells
-    h = 2*Ld+Lc;
-    m=(r2/r1)^2;
+    h = 2*Ld+Lc;       % Length of the cell [m]
     
 
 
