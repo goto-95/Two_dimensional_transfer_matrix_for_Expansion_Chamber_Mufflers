@@ -1,12 +1,12 @@
-function [Xa,Xt] = Aux_AlphaCoef(r1,r2,alpha,kI,kII,Lc,N,A0)
+function [Xa,Xt] = Aux_AlphaCoef(rd,rc,alpha,kI,kII,Lc,N,A0)
     %   ===============================================================================
     %%%%%%%%%% ==========  ========== %%%%%%%%%% 
     %%%%% ----- Description ----- %%%%%
     %   
     %
     %%%%% ----- Arguments ----- %%%%%
-    % r1     -> Inner perforated duct diameter [m]
-    % r2     -> Outer duct diameter [m]
+    % rd     -> Inner perforated duct diameter [m]
+    % rc     -> Outer duct diameter [m]
     % alpha  -> Eigenroots for radial modes
     % kIn    -> Axial wavenumber at the inlet/outlet duct
     % kIIn   -> Axial wavenumber at the expansion chamber
@@ -28,9 +28,9 @@ function [Xa,Xt] = Aux_AlphaCoef(r1,r2,alpha,kI,kII,Lc,N,A0)
     M42 = M11;  M43 = M11;  M44 = M11; 
     v2 = zeros(N+1,1);
     
-    I1 = 0.5*r1^2;
+    I1 = 0.5*rd^2;
     I5 = 2*I1;
-    I6 = r2^2;
+    I6 = rc^2;
     
     M11(1,1) = I1;
     M12(1,1) = -I1;
@@ -46,13 +46,13 @@ function [Xa,Xt] = Aux_AlphaCoef(r1,r2,alpha,kI,kII,Lc,N,A0)
     v2(1) = -I5*A0;
     
     for n=2:N+1
-        I2 = ((r1*r2)/alpha(n))*besselj(1,alpha(n)*r1/r2);
+        I2 = ((rd*rc)/alpha(n))*besselj(1,alpha(n)*rd/rc);
         M12(1,n) = -I2;
         M32(1,n) = I2*exp(1i*kII(n)*Lc);
         M33(1,n) = I2*exp(-1i*kII(n)*Lc);
         
         s=n;
-        I7 = ((r1*r2)/alpha(s))*besselj(1,alpha(s)*r1/r2);
+        I7 = ((rd*rc)/alpha(s))*besselj(1,alpha(s)*rd/rc);
         M21(s,1) = -ko*I7;
         M44(s,1) = ko*I7;
         v2(s) = -ko*I7*A0;
@@ -62,10 +62,10 @@ function [Xa,Xt] = Aux_AlphaCoef(r1,r2,alpha,kI,kII,Lc,N,A0)
     for s=2:N+1
         for n=2:N+1
             I3 = I1*besselj(0,alpha(n))^2;
-            I4 = ( (r1/r2)*alpha(n)*besselj(0,alpha(s))*besselj(1,alpha(n)*r1/r2))...
-                /( (alpha(n)/r2)^2 -(alpha(s)/r1)^2 );
-            I8 = ( (r1/r2)*alpha(s)*besselj(0,alpha(n))*besselj(1,alpha(s)*r1/r2))...
-                  /( (alpha(s)/r2)^2 -(alpha(n)/r1)^2 );
+            I4 = ( (rd/rc)*alpha(n)*besselj(0,alpha(s))*besselj(1,alpha(n)*rd/rc))...
+                /( (alpha(n)/rc)^2 -(alpha(s)/rd)^2 );
+            I8 = ( (rd/rc)*alpha(s)*besselj(0,alpha(n))*besselj(1,alpha(s)*rd/rc))...
+                  /( (alpha(s)/rc)^2 -(alpha(n)/rd)^2 );
             I9 = 0.5*I6*besselj(0,alpha(n))^2;
             
             M12(s,n) = -I4;

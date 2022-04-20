@@ -1,14 +1,14 @@
 function [kB,phi,lambda] = Aux_BraggWavenumber(T)
     % =====================================================================
-    %%%%%%%%%% ========== Aux_TransmissionLoss ========== %%%%%%%%%% 
-    %%%%% ----- Code overview ----- %%%%%
+    %%%%%%%%%% ========== Aux_BraggWavenumber ========== %%%%%%%%%% 
+    %%%%% ----- Overview ----- %%%%%
     %   Auxiliar function to calculate the Bragg wavenumber and the
     %   eigenvectors and eigenvalues
     %
-    %%%%% ----- Arguments ----- %%%%%
+    %%%%% ----- Input ----- %%%%%
     % T   -> Transfer matrix
     %          
-    %%%%% ----- Saída ----- %%%%%
+    %%%%% ----- Output ----- %%%%%
     % kB     -> Bragg wavenumber
     % phi    -> Eigenvectors of the transfer matrix
     % lambda -> Eigenvalues of the transfer matrix
